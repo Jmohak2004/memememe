@@ -1,0 +1,11 @@
+node_modules
+.env
+.env.*
+!.env.example
+artifacts
+cache
+typechain-types
+coverage
+dist
+.DS_Store
+contracts-pkg/ignition/deployments/chain-31337
