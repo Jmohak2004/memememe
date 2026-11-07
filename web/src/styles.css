@@ -1,0 +1,15 @@
+:root{color-scheme:dark;--bg:#0b0b14;--card:#14142a;--line:#26264a;--fg:#ececff;--mut:#8f8fb5;--acc:#8b5cf6}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,sans-serif}
+a{color:inherit;text-decoration:none}main{max-width:1000px;margin:0 auto;padding:24px 16px}
+.nav{display:flex;align-items:center;gap:24px;padding:14px 24px;border-bottom:1px solid var(--line)}.nav nav{display:flex;gap:16px;flex:1;color:var(--mut)}.logo{font-weight:800;font-size:20px;color:var(--acc)}
+.faucet{background:#1d1840;padding:8px 24px;font-size:13px;display:flex;gap:14px;flex-wrap:wrap}.faucet a{color:#c4b5fd;text-decoration:underline}
+.hero{text-align:center;padding:40px 0}.hero h1{font-size:clamp(28px,5vw,44px);margin:0 0 12px}.hero p{color:var(--mut);max-width:640px;margin:0 auto 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}.card,.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.card:hover{border-color:var(--acc)}.card h3{margin:0 0 10px}.muted{color:var(--mut);font-size:14px}.warn{color:#fbbf24}
+.stats{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--mut)}.stats b{display:block;color:var(--fg);font-size:15px}.stats.big b{font-size:20px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:760px){.two{grid-template-columns:1fr}}
+label{display:block;margin:12px 0;font-size:13px;color:var(--mut)}input,textarea{width:100%;margin-top:6px;padding:10px;border-radius:8px;border:1px solid var(--line);background:#0e0e20;color:var(--fg)}
+.btn{display:inline-block;background:var(--acc);color:#fff;border:0;border-radius:10px;padding:11px 20px;font-weight:700;cursor:pointer;margin-top:8px}.btn:disabled{opacity:.4;cursor:not-allowed}.btn.sm{padding:7px 12px;font-size:13px}
+.row{display:flex;gap:8px}.tabs{display:flex;gap:6px}.tabs button{flex:1;padding:10px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--mut);cursor:pointer}.tabs .on{background:var(--acc);color:#fff}
+.bar{height:8px;background:#0e0e20;border-radius:99px;overflow:hidden;margin-top:14px}.bar i{display:block;height:100%;background:var(--acc)}
+.note{background:#0e0e20;border-radius:8px;padding:12px;font-size:13px;color:var(--mut);line-height:1.5}
