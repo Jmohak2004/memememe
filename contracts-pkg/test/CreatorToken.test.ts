@@ -163,3 +163,17 @@ describe("community airdrop", () => {
     await expect(token.connect(b).claimAirdrop(amt + 1n, tree.getProof(1))).to.be.revertedWithCustomError(token, "BadProof");
   });
 });
+
+describe("CreatorTokenLens", () => {
+  it("batches token and user info", async () => {
+    const { token, factory, a } = await setup();
+    const lens = await (await ethers.getContractFactory("CreatorTokenLens")).deploy();
+    await token.connect(a).buy(0, { value: ethers.parseEther("1") });
+    const infos = await lens.page(await factory.getAddress(), 0, 10);
+    expect(infos.length).to.equal(1);
+    expect(infos[0].symbol).to.equal("HYPE");
+    const [ports, total] = await lens.portfolio([await token.getAddress()], a.address);
+    expect(ports[0].balance).to.be.gt(0);
+    expect(total).to.equal(ports[0].pendingDividends);
+  });
+});
