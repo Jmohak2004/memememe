@@ -1,0 +1,38 @@
+export const factoryAbi = [
+  { type: "function", name: "createToken", stateMutability: "payable", inputs: [
+    { name: "name", type: "string" }, { name: "symbol", type: "string" }, { name: "maxSupply", type: "uint256" },
+    { name: "vEth0", type: "uint256" }, { name: "vestDuration", type: "uint256" }, { name: "metadataURI", type: "string" }], outputs: [{ type: "address" }] },
+  { type: "function", name: "launchFee", stateMutability: "view", inputs: [], outputs: [{ type: "uint256" }] },
+  { type: "function", name: "allTokensLength", stateMutability: "view", inputs: [], outputs: [{ type: "uint256" }] },
+  { type: "function", name: "getTokens", stateMutability: "view", inputs: [{ name: "offset", type: "uint256" }, { name: "limit", type: "uint256" }], outputs: [{ type: "address[]" }] },
+] as const;
+
+export const tokenAbi = [
+  { type: "function", name: "name", stateMutability: "view", inputs: [], outputs: [{ type: "string" }] },
+  { type: "function", name: "symbol", stateMutability: "view", inputs: [], outputs: [{ type: "string" }] },
+  { type: "function", name: "totalSupply", stateMutability: "view", inputs: [], outputs: [{ type: "uint256" }] },
+  { type: "function", name: "balanceOf", stateMutability: "view", inputs: [{ type: "address" }], outputs: [{ type: "uint256" }] },
+  { type: "function", name: "creator", stateMutability: "view", inputs: [], outputs: [{ type: "address" }] },
+  { type: "function", name: "maxSupply", stateMutability: "view", inputs: [], outputs: [{ type: "uint256" }] },
+  { type: "function", name: "curveSupply", stateMutability: "view", inputs: [], outputs: [{ type: "uint256" }] },
+  { type: "function", name: "tokensSold", stateMutability: "view", inputs: [], outputs: [{ type: "uint256" }] },
+  { type: "function", name: "spotPrice", stateMutability: "view", inputs: [], outputs: [{ type: "uint256" }] },
+  { type: "function", name: "metadataURI", stateMutability: "view", inputs: [], outputs: [{ type: "string" }] },
+  { type: "function", name: "totalDividendsDistributed", stateMutability: "view", inputs: [], outputs: [{ type: "uint256" }] },
+  { type: "function", name: "creatorFees", stateMutability: "view", inputs: [], outputs: [{ type: "uint256" }] },
+  { type: "function", name: "vestedAmount", stateMutability: "view", inputs: [], outputs: [{ type: "uint256" }] },
+  { type: "function", name: "creatorClaimed", stateMutability: "view", inputs: [], outputs: [{ type: "uint256" }] },
+  { type: "function", name: "airdropRoot", stateMutability: "view", inputs: [], outputs: [{ type: "bytes32" }] },
+  { type: "function", name: "airdropDone", stateMutability: "view", inputs: [{ type: "address" }], outputs: [{ type: "bool" }] },
+  { type: "function", name: "withdrawableDividendOf", stateMutability: "view", inputs: [{ type: "address" }], outputs: [{ type: "uint256" }] },
+  { type: "function", name: "earlySellPenaltyBps", stateMutability: "view", inputs: [{ type: "address" }], outputs: [{ type: "uint256" }] },
+  { type: "function", name: "quoteBuy", stateMutability: "view", inputs: [{ name: "ethIn", type: "uint256" }], outputs: [{ name: "tokensOut", type: "uint256" }, { name: "ethUsed", type: "uint256" }, { name: "fee", type: "uint256" }] },
+  { type: "function", name: "quoteSell", stateMutability: "view", inputs: [{ name: "seller", type: "address" }, { name: "tokensIn", type: "uint256" }], outputs: [{ name: "ethOut", type: "uint256" }, { name: "fee", type: "uint256" }, { name: "penalty", type: "uint256" }] },
+  { type: "function", name: "buy", stateMutability: "payable", inputs: [{ name: "minTokensOut", type: "uint256" }], outputs: [{ type: "uint256" }] },
+  { type: "function", name: "sell", stateMutability: "nonpayable", inputs: [{ name: "tokensIn", type: "uint256" }, { name: "minEthOut", type: "uint256" }], outputs: [{ type: "uint256" }] },
+  { type: "function", name: "claimDividends", stateMutability: "nonpayable", inputs: [], outputs: [{ type: "uint256" }] },
+  { type: "function", name: "claimCreatorFees", stateMutability: "nonpayable", inputs: [], outputs: [] },
+  { type: "function", name: "claimVested", stateMutability: "nonpayable", inputs: [], outputs: [{ type: "uint256" }] },
+  { type: "function", name: "setAirdropRoot", stateMutability: "nonpayable", inputs: [{ type: "bytes32" }], outputs: [] },
+  { type: "function", name: "claimAirdrop", stateMutability: "nonpayable", inputs: [{ name: "amount", type: "uint256" }, { name: "proof", type: "bytes32[]" }], outputs: [] },
+] as const;
