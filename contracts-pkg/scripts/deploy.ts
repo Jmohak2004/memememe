@@ -14,10 +14,15 @@ async function main() {
   const address = await factory.getAddress();
   console.log("CreatorTokenFactory:", address);
 
+  const lens = await (await ethers.getContractFactory("CreatorTokenLens")).deploy();
+  await lens.waitForDeployment();
+  const lensAddress = await lens.getAddress();
+  console.log("CreatorTokenLens:", lensAddress);
+
   const file = path.join(__dirname, "..", "deployments.json");
   const all = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, "utf8")) : {};
   const chainId = Number((await ethers.provider.getNetwork()).chainId);
-  all[chainId] = { network: network.name, factory: address, treasury, block: await ethers.provider.getBlockNumber() };
+  all[chainId] = { network: network.name, factory: address, lens: lensAddress, treasury, block: await ethers.provider.getBlockNumber() };
   fs.writeFileSync(file, JSON.stringify(all, null, 2));
 }
 main().catch((e) => { console.error(e); process.exitCode = 1; });

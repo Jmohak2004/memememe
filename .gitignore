@@ -9,3 +9,4 @@ coverage
 dist
 .DS_Store
 contracts-pkg/ignition/deployments/chain-31337
+deployments.local.json
