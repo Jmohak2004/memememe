@@ -28,8 +28,20 @@ npm i --legacy-peer-deps && npm run dev
 ```
 Faucets: Sepolia (Google Cloud / Alchemy), Base Sepolia (Coinbase CDP / Alchemy); links shown in-app.
 
+## Local end-to-end testing (no keys needed)
+```bash
+cd contracts-pkg && npx hardhat node                                   # terminal 1
+cd contracts-pkg && npx hardhat run scripts/seed-local.ts --network localhost   # terminal 2, prints factory address
+cd web && VITE_ENABLE_LOCAL=true VITE_FACTORY_LOCAL=<factory> npm run dev        # terminal 3
+```
+Add the Hardhat network (RPC http://127.0.0.1:8545, chain 31337) to MetaMask and import a Hardhat test account.
+
+## Pages
+Explore · Launch (build-your-coin) · Top (leaderboards) · My Stash (claim-all) · Token (trade, chart, activity, crew card, creator console).
+
 ## Known limits (testnet-grade, unaudited)
 - Early-sell penalty keys off last *buy*; moving tokens to a fresh wallet bypasses it.
 - Curve never "graduates" to a DEX; it is the permanent market.
 - Airdrop tree JSON is shared off-chain (stored in creator's browser); a backend/IPFS pin is a next step.
+- The mascot is Among-Us-*inspired*; replace it with your own art before any commercial launch.
 - Not audited. Do not use real funds.
