@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Create from "./pages/Create";
 import TokenPage from "./pages/TokenPage";
 import Portfolio from "./pages/Portfolio";
+import Leaderboard from "./pages/Leaderboard";
 import { FaucetBar } from "./components/FaucetBar";
 import { Stars, Ticker } from "./components/Fx";
 import { Crewmate } from "./components/Crewmate";
@@ -23,6 +24,7 @@ export default function App() {
         <nav>
           <NavLink to="/" end className={cls}>🪐 Explore</NavLink>
           <NavLink to="/create" className={cls}>🛠️ Launch</NavLink>
+          <NavLink to="/top" className={cls}>🏆 Top</NavLink>
           <NavLink to="/stash" className={cls}>💰 My Stash</NavLink>
         </nav>
         <ConnectButton chainStatus="icon" showBalance={false} accountStatus="avatar" />
@@ -33,6 +35,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/create" element={<Create />} />
+          <Route path="/top" element={<Leaderboard />} />
           <Route path="/stash" element={<Portfolio />} />
           <Route path="/token/:chainId/:address" element={<TokenPage />} />
         </Routes>

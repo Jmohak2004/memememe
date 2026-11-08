@@ -154,3 +154,6 @@ input[type=range]{padding:0;height:34px;box-shadow:none;accent-color:var(--pink)
 @keyframes fall{to{transform:translate(var(--dx),110vh) rotate(720deg)}}
 
 footer{text-align:center;color:#cfc6ff;padding:30px 16px;font-size:13px}
+.mini{width:30px;height:30px;overflow:hidden;border-radius:8px;border:2px solid var(--ink);display:grid;place-items:center;flex:none}
+.mini svg{transform:scale(.5)}
+a.it{color:inherit}a.it:hover{background:var(--yellow)}
