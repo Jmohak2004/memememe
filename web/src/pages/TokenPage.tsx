@@ -107,6 +107,11 @@ export default function TokenPage() {
             <span>PRICE<b>{fmtEth(price, 9)} Ξ</b></span><span>SUPPLY<b>{fmtTok(supply)}</b></span>
             <span>PAID TO CREW<b>{fmtEth(totalDivs)} Ξ</b></span><span>MAX SUPPLY<b>{fmtTok(maxSupply)}</b></span>
           </div>
+          <div className="row" style={{ marginBottom: 12 }}>
+            <button className="btn sm blue" onClick={() => { navigator.clipboard?.writeText(location.href); setMsg("Link copied 🔗"); setTimeout(() => setMsg(""), 1500); }}>🔗 Copy link</button>
+            <a className="btn sm pink" target="_blank" rel="noreferrer"
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out $${symbol ?? ""} on CreatorCoin — holders get paid on every trade 🚀`)}&url=${encodeURIComponent(location.href)}`}>🐦 Share</a>
+          </div>
           <PriceChart trades={trades} />
           <h3>⛽ Launch progress</h3>
           <Meter value={pct} label={`${pct.toFixed(2)}% of market supply sold`} />
