@@ -157,3 +157,5 @@ footer{text-align:center;color:#cfc6ff;padding:30px 16px;font-size:13px}
 .mini{width:30px;height:30px;overflow:hidden;border-radius:8px;border:2px solid var(--ink);display:grid;place-items:center;flex:none}
 .mini svg{transform:scale(.5)}
 a.it{color:inherit}a.it:hover{background:var(--yellow)}
+.chip button{background:none;border:0;padding:0;font:inherit;font-weight:700;cursor:pointer}
+.chip a{margin-left:6px;text-decoration:none;font-weight:700}

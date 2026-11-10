@@ -30,3 +30,10 @@ export const FAUCETS: Record<number, { label: string; url: string }[]> = {
     { label: "Alchemy Base Sepolia faucet", url: "https://www.alchemy.com/faucets/base-sepolia" },
   ],
 };
+
+export const EXPLORERS: Record<number, string> = {
+  [sepolia.id]: "https://sepolia.etherscan.io",
+  [baseSepolia.id]: "https://sepolia.basescan.org",
+};
+export const explorerAddr = (chainId: number, a: string) => (EXPLORERS[chainId] ? `${EXPLORERS[chainId]}/address/${a}` : undefined);
+export const explorerTx = (chainId: number, h: string) => (EXPLORERS[chainId] ? `${EXPLORERS[chainId]}/tx/${h}` : undefined);
