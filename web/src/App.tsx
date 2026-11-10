@@ -5,6 +5,7 @@ import Create from "./pages/Create";
 import TokenPage from "./pages/TokenPage";
 import Portfolio from "./pages/Portfolio";
 import Leaderboard from "./pages/Leaderboard";
+import { NetworkGuard } from "./components/NetworkGuard";
 import { FaucetBar } from "./components/FaucetBar";
 import { Stars, Ticker } from "./components/Fx";
 import { Crewmate } from "./components/Crewmate";
@@ -30,6 +31,7 @@ export default function App() {
         <ConnectButton chainStatus="icon" showBalance={false} accountStatus="avatar" />
       </header>
       <Ticker items={TICKS} />
+      <NetworkGuard />
       <FaucetBar />
       <main>
         <Routes>
