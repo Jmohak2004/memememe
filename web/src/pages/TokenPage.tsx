@@ -10,6 +10,7 @@ import { Badge, Confetti, Meter, Toast } from "../components/Fx";
 import { PriceChart } from "../components/PriceChart";
 import { useTrades } from "../lib/useTrades";
 import { ipfsUpload } from "../lib/ipfs";
+import { CopyChip } from "../components/CopyChip";
 
 const ZERO = "0x0000000000000000000000000000000000000000";
 
@@ -99,7 +100,7 @@ export default function TokenPage() {
             <CoinAvatar address={token} size={90} className="avatar" />
             <div>
               <h2>{name ?? "…"}</h2>
-              <div className="pills"><span className="pill">${symbol}</span><span className="pill">👤 {creator ? short(creator) : "…"}</span><span className="pill">📜 {short(token)}</span></div>
+              <div className="pills"><span className="pill">${symbol}</span>{creator && <CopyChip value={creator} chainId={chainId} icon="👤" />}<CopyChip value={token} chainId={chainId} icon="📜" /></div>
             </div>
           </div>
           <div className="stats">
