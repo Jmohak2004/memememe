@@ -4,6 +4,8 @@ import Home from "./pages/Home";
 import Create from "./pages/Create";
 import TokenPage from "./pages/TokenPage";
 import Portfolio from "./pages/Portfolio";
+import NotFound from "./pages/NotFound";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 import Leaderboard from "./pages/Leaderboard";
 import { NetworkGuard } from "./components/NetworkGuard";
 import { FaucetBar } from "./components/FaucetBar";
@@ -34,13 +36,14 @@ export default function App() {
       <NetworkGuard />
       <FaucetBar />
       <main>
-        <Routes>
+        <ErrorBoundary><Routes>
           <Route path="/" element={<Home />} />
           <Route path="/create" element={<Create />} />
           <Route path="/top" element={<Leaderboard />} />
           <Route path="/stash" element={<Portfolio />} />
           <Route path="/token/:chainId/:address" element={<TokenPage />} />
-        </Routes>
+          <Route path="*" element={<NotFound />} />
+        </Routes></ErrorBoundary>
       </main>
       <footer>Testnet only · unaudited · play with fake ETH 🧪</footer>
     </>
