@@ -12,7 +12,7 @@
 - Every buy and sell is bounded by user-supplied slippage limits.
 
 ## Known risks
-- **Penalty bypass:** the early-sell tax tracks last *buy*; transferring to a fresh wallet avoids it.
+- **Penalty blending:** the early-sell clock follows transfers as a balance-weighted average, so a fresh wallet inherits the sender's clock. Someone can still dilute it by sending fresh tokens to a wallet that holds a large old balance (they pay the blended penalty, not the full one).
 - **Creator can be a contract** that reverts on ETH receipt; this only blocks its own fee claims.
 - **Airdrop root is one-shot**: a wrong root cannot be corrected. Verify the list before publishing.
 - **Dividend rounding** leaves at most dust in the contract.

@@ -40,7 +40,7 @@ Add the Hardhat network (RPC http://127.0.0.1:8545, chain 31337) to MetaMask and
 Explore · Launch (build-your-coin) · Top (leaderboards) · My Stash (claim-all) · Token (trade, chart, activity, crew card, creator console).
 
 ## Known limits (testnet-grade, unaudited)
-- Early-sell penalty keys off last *buy*; moving tokens to a fresh wallet bypasses it.
+- Early-sell penalty keys off a per-wallet buy clock that follows transfers (balance-weighted blend), so moving tokens to a fresh wallet does not dodge it. Buying again resets the whole wallet's clock, and a user can still blend fresh tokens with old ones they hold elsewhere.
 - Curve never "graduates" to a DEX; it is the permanent market.
 - Airdrop tree JSON is shared off-chain (stored in creator's browser); a backend/IPFS pin is a next step.
 - The mascot is Among-Us-*inspired*; replace it with your own art before any commercial launch.

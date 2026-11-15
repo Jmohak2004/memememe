@@ -240,7 +240,23 @@ contract CreatorToken is ERC20, ReentrancyGuard {
         emit DividendWithdrawn(msg.sender, amt);
     }
 
+    /// @dev Timestamp used to price a wallet's early-sell penalty. Wallets with no recent buy (or one older
+    ///      than the window) count as "just outside the window", i.e. zero penalty today.
+    function _effectiveBuyStamp(address a) internal view returns (uint256) {
+        uint256 floor_ = block.timestamp > PENALTY_WINDOW ? block.timestamp - PENALTY_WINDOW : 1;
+        uint256 t = lastBuyAt[a];
+        return t < floor_ ? floor_ : t;
+    }
+
     function _update(address from, address to, uint256 value) internal override {
+        // Plain transfers carry the sender's penalty clock with them (balance-weighted blend), so moving
+        // freshly bought tokens to a new wallet no longer dodges the early-sell penalty. Weighting by
+        // balance also means dust sent to a holder barely moves that holder's clock.
+        if (from != address(0) && to != address(0) && from != to && value != 0) {
+            uint256 toBal = balanceOf(to);
+            lastBuyAt[to] =
+                (_effectiveBuyStamp(to) * toBal + _effectiveBuyStamp(from) * value) / (toBal + value);
+        }
         super._update(from, to, value);
         int256 c = int256(magnifiedPerShare * value);
         if (from == address(0)) {
