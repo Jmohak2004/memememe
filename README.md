@@ -37,7 +37,7 @@ cd web && VITE_ENABLE_LOCAL=true VITE_FACTORY_LOCAL=<factory> npm run dev       
 Add the Hardhat network (RPC http://127.0.0.1:8545, chain 31337) to MetaMask and import a Hardhat test account.
 
 ## Pages
-Explore · Launch (build-your-coin) · Top (leaderboards) · My Stash (claim-all) · Token (trade, chart, activity, crew card, creator console).
+Explore (search by name/ticker/address, sort by newest, most paid out, most launched, price) · Launch (build-your-coin) · Top (leaderboards) · My Stash (claim-all, plus a ⭐ watchlist stored in your browser) · Token (trade, chart, activity, top holders, crew card, creator console, ☆ watch).
 
 ## Known limits (testnet-grade, unaudited)
 - Early-sell penalty keys off a per-wallet buy clock that follows transfers (balance-weighted blend), so moving tokens to a fresh wallet does not dodge it. Buying again resets the whole wallet's clock, and a user can still blend fresh tokens with old ones they hold elsewhere.
