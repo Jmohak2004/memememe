@@ -9,6 +9,7 @@ import { CoinAvatar } from "../components/CoinAvatar";
 import { Badge, Confetti, Meter, Toast } from "../components/Fx";
 import { PriceChart } from "../components/PriceChart";
 import { useTrades } from "../lib/useTrades";
+import { useHolders } from "../lib/useHolders";
 import { ipfsUpload } from "../lib/ipfs";
 import { CopyChip } from "../components/CopyChip";
 import { StarButton } from "../components/StarButton";
@@ -23,6 +24,7 @@ export default function TokenPage() {
   const pc = usePublicClient({ chainId });
   const { writeContractAsync } = useWriteContract();
   const trades = useTrades(token, chainId);
+  const holders = useHolders(token, chainId);
   const [tab, setTab] = useState<"buy" | "sell">("buy");
   const [amt, setAmt] = useState("");
   const [msg, setMsg] = useState("");
@@ -126,6 +128,24 @@ export default function TokenPage() {
             {[...trades].reverse().slice(0, 25).map((t) => (
               <div className="it" key={t.tx + t.side}><b className={t.side}>{t.side === "buy" ? "🟢 BUY" : "🔴 SELL"}</b><span>{short(t.who)}</span><span style={{ marginLeft: "auto" }}>{fmtEth(t.eth, 4)} Ξ</span></div>
             ))}
+          </div>
+        </section>
+
+        <section className="panel" style={{ marginTop: 20 }}>
+          <h2>🏅 Top holders</h2>
+          <div className="feed">
+            {holders.length === 0 && <div className="muted">No holders found in the recent block window.</div>}
+            {holders.map((h, i) => {
+              const share = supply > 0n ? Number((h.balance * 10000n) / supply) / 100 : 0;
+              return (
+                <div className="it" key={h.address}>
+                  <b>#{i + 1}</b><CopyChip value={h.address} chainId={chainId} icon="👛" />
+                  {creator && h.address.toLowerCase() === (creator as string).toLowerCase() && <span className="pill">creator</span>}
+                  {me && h.address.toLowerCase() === me.toLowerCase() && <span className="pill">you</span>}
+                  <span style={{ marginLeft: "auto" }}>{fmtTok(h.balance)} · {share.toFixed(2)}%</span>
+                </div>
+              );
+            })}
           </div>
         </section>
       </div>
