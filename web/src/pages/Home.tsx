@@ -7,6 +7,7 @@ import { fmtEth, fmtTok } from "../lib/format";
 import { Crewmate } from "../components/Crewmate";
 import { CoinAvatar } from "../components/CoinAvatar";
 import { Meter } from "../components/Fx";
+import { StarButton } from "../components/StarButton";
 
 type Coin = { address: `0x${string}`; idx: number; name?: string; symbol?: string; price: bigint; paid: bigint; pct: number };
 type SortKey = "new" | "price" | "paid" | "launched";
@@ -17,12 +18,15 @@ const SORTS: { k: SortKey; label: string }[] = [
 
 function CoinCard({ coin, chainId }: { coin: Coin; chainId: number }) {
   return (
+    <div className="coinwrap">
+    <StarButton address={coin.address} chainId={chainId} />
     <Link className="card coin" to={`/token/${chainId}/${coin.address}`}>
       {coin.paid > 0n && <div className="payout">PAYING</div>}
       <div className="top"><CoinAvatar address={coin.address} /><div><h3>{coin.name ?? "…"}</h3><span className="sym">${coin.symbol ?? ""}</span></div></div>
       <div className="kv"><div>PRICE<b>{fmtEth(coin.price, 8)} Ξ</b></div><div>PAID TO CREW<b>{fmtEth(coin.paid)} Ξ</b></div></div>
       <Meter value={coin.pct} label={`⛽ ${coin.pct.toFixed(1)}% launched`} />
     </Link>
+    </div>
   );
 }
 
@@ -114,8 +118,8 @@ export default function Home() {
       {n > 0 && (
         <div className="toolbar">
           <input type="search" aria-label="Search coins" placeholder="🔎 Search name, $ticker or address" value={q} onChange={(e) => setQ(e.target.value)} />
-          <div className="pills" role="group" aria-label="Sort coins">
-            {SORTS.map((o) => <button key={o.k} type="button" className={sort === o.k ? "pill on" : "pill"} aria-pressed={sort === o.k} onClick={() => setSort(o.k)}>{o.label}</button>)}
+          <div className="sorts" role="group" aria-label="Sort coins">
+            {SORTS.map((o) => <button key={o.k} type="button" className={sort === o.k ? "sort on" : "sort"} aria-pressed={sort === o.k} onClick={() => setSort(o.k)}>{o.label}</button>)}
           </div>
         </div>
       )}

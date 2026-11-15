@@ -7,6 +7,37 @@ import { fmtEth, fmtTok } from "../lib/format";
 import { CoinAvatar } from "../components/CoinAvatar";
 import { Crewmate } from "../components/Crewmate";
 import { Confetti, Toast } from "../components/Fx";
+import { StarButton } from "../components/StarButton";
+import { useWatchlist } from "../lib/useWatchlist";
+
+function Watching({ chainId }: { chainId: number }) {
+  const { list } = useWatchlist(chainId);
+  const { data } = useReadContracts({
+    contracts: list.flatMap((t) => [
+      { address: t, abi: tokenAbi, chainId, functionName: "name" },
+      { address: t, abi: tokenAbi, chainId, functionName: "symbol" },
+      { address: t, abi: tokenAbi, chainId, functionName: "spotPrice" },
+    ] as const),
+    query: { enabled: list.length > 0 },
+  });
+  return (
+    <>
+      <h2 className="section-title">⭐ Watching</h2>
+      {list.length === 0 && <p className="warn">Tap ☆ on any coin to keep an eye on it here. Saved in this browser only.</p>}
+      <div className="grid">
+        {list.map((t, i) => (
+          <div className="coinwrap" key={t}>
+            <StarButton address={t} chainId={chainId} />
+            <Link className="card coin" to={`/token/${chainId}/${t}`}>
+              <div className="top"><CoinAvatar address={t} /><div><h3>{(data?.[i * 3]?.result as string) ?? "…"}</h3><span className="sym">${(data?.[i * 3 + 1]?.result as string) ?? ""}</span></div></div>
+              <div className="kv"><div>PRICE<b>{fmtEth(data?.[i * 3 + 2]?.result as bigint | undefined, 8)} Ξ</b></div></div>
+            </Link>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}
 
 export default function Portfolio() {
   const chainId = useChainId();
@@ -43,7 +74,12 @@ export default function Portfolio() {
     } catch (e: any) { setMsg(e?.shortMessage || "failed"); }
   }
 
-  if (!me) return <div className="empty-state"><Crewmate size={90} color="#22c55e" wave /><h3>Connect a wallet to see your stash</h3></div>;
+  if (!me) return (
+    <>
+      <div className="empty-state"><Crewmate size={90} color="#22c55e" wave /><h3>Connect a wallet to see your stash</h3></div>
+      <Watching chainId={chainId} />
+    </>
+  );
   return (
     <>
       <Confetti fire={boom} />
@@ -62,6 +98,7 @@ export default function Portfolio() {
         ))}
       </div>
       {rows.length === 0 && <div className="empty-state"><Crewmate size={90} color="#3b82f6" wave /><h3>Nothing here yet</h3><Link className="btn" to="/">Find a coin</Link></div>}
+      <Watching chainId={chainId} />
       <Toast text={msg} />
     </>
   );

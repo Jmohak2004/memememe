@@ -11,6 +11,7 @@ import { PriceChart } from "../components/PriceChart";
 import { useTrades } from "../lib/useTrades";
 import { ipfsUpload } from "../lib/ipfs";
 import { CopyChip } from "../components/CopyChip";
+import { StarButton } from "../components/StarButton";
 
 const ZERO = "0x0000000000000000000000000000000000000000";
 
@@ -108,6 +109,7 @@ export default function TokenPage() {
             <span>PAID TO CREW<b>{fmtEth(totalDivs)} Ξ</b></span><span>MAX SUPPLY<b>{fmtTok(maxSupply)}</b></span>
           </div>
           <div className="row" style={{ marginBottom: 12 }}>
+            <StarButton address={token} chainId={chainId} className="btn sm yellow" withText />
             <button className="btn sm blue" onClick={() => { navigator.clipboard?.writeText(location.href); setMsg("Link copied 🔗"); setTimeout(() => setMsg(""), 1500); }}>🔗 Copy link</button>
             <a className="btn sm pink" target="_blank" rel="noreferrer"
               href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out $${symbol ?? ""} on CreatorCoin — holders get paid on every trade 🚀`)}&url=${encodeURIComponent(location.href)}`}>🐦 Share</a>
